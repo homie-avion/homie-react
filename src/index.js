@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 
 import App from './App';
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+import './index.css';
+// import 'bootstrap/dist/css/bootstrap.min.css'
 
 import UserState from './context/user/UserState'
 
