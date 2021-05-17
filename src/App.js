@@ -1,7 +1,8 @@
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import Navbar from './components/layout/navbar/navbar.component'
-import Home from './components/pages/home.component'
+import Home from './components/pages/home/home.component'
+import Footer from './components/layout/footer/footer.component'
 import NotFound from './components/pages/notfound.component'
 
 import AlertContainer from './components/shared/alert/alert-container.component'
@@ -39,6 +40,7 @@ function App() {
 
               <Route component={NotFound}/>
             </Switch>
+            <Footer/>
           </div>
         </Router>
       </ModalState>
