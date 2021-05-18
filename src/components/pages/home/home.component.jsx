@@ -1,8 +1,8 @@
 import React, {useContext, Fragment} from 'react'
 import UserContext from '../../../context/user/userContext'
-import { useHistory, withRouter } from 'react-router-dom'
+import { useHistory, withRouter, Link } from 'react-router-dom'
 
-import LocationDropdown from './LocationDropdown.component'
+// import LocationDropdown from './LocationDropdown.component'
 
 const Home = () => {
     const userContext = useContext(UserContext)
@@ -24,8 +24,10 @@ const Home = () => {
                         <h1 className="text-white text-7xl font-extrabold tracking-tight mb-2">
                             Find your next home!
                         </h1>
-                        <p className="text-white mb-2">House, condominiums, and apartments for rent.</p>
-                        <LocationDropdown/>
+                        <p className="text-white mb-8">House, condominiums, and apartments for rent.</p>
+                        <Link to="/signup" className="font-normal w-max text-2xl px-6 py-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-400 hover:bg-red-500">
+                            Sign with us!
+                        </Link>
                     </div>
                 </div>
             </section>

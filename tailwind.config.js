@@ -4,8 +4,12 @@ module.exports = {
   theme: {
     extend: {
       height: (theme) => ({
+        "screen-25vh": "25vh",
         "screen-50vh": "50vh",
         "screen-70vh": "70vh",
+      }),
+      maxWidth: (theme) => ({ 
+        "500px": "500px",
       }),
       backgroundPosition: (theme) => ({
         "top-center": "top center",
