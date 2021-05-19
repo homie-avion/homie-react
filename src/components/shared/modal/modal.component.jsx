@@ -1,5 +1,5 @@
 import React, { useContext} from 'react'
-import {Modal as ModalB} from 'react-bootstrap'
+// import {Modal as ModalB} from 'react-bootstrap'
 
 import ModalContext from '../../../context/modal/modalContext'
 
@@ -14,11 +14,13 @@ const Modal = () => {
         DeleteUser : <UserDelete/>
     }
     return (
-        <ModalB show={show} onHide={hideModal} centered>
+        <div show={show} onHide={hideModal} centered>
             {
                 modalContentDict[modalBody]
             }
-        </ModalB>
+        </div>
+
+        
     )
 }
 

@@ -11,24 +11,42 @@ const ModalContentDelete = (props) => {
 
     return (
         <Fragment>
-            <Modal.Header closeButton className="border-0">
-            <Modal.Title>{title}</Modal.Title>
-            </Modal.Header>
+            <h2 closeButton className="border-0">
+            {title}
+            </h2>
 
-            <Modal.Body>
+            <div>
                 {message}
-            </Modal.Body>
+            </div>
 
-            <Modal.Footer className="border-0">
+            <div className="border-0">
                 <Button
                     {...button_props_cancel}
                 />
                 <Button
                     {...button_props_delete}
                 />
-            </Modal.Footer> 
+            </div> 
         </Fragment>
     )
 }
 
 export default ModalContentDelete
+// <Fragment>
+//             <h2 closeButton className="border-0">
+//             {title}
+//             </h2>
+
+//             <div>
+//                 {message}
+//             </div>
+
+//             <div className="border-0">
+//                 <Button
+//                     {...button_props_cancel}
+//                 />
+//                 <Button
+//                     {...button_props_delete}
+//                 />
+//             </div> 
+//         </Fragment>

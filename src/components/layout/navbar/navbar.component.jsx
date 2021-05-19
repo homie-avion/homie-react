@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, Fragment } from "react";
 import { useHistory, withRouter, Link } from "react-router-dom";
 
-import Dropdown from './dropdown.component'
+import Dropdown from "./dropdown.component";
 // import { Navbar as NavbarB, Nav} from 'react-bootstrap'
 
 //context
@@ -9,99 +9,104 @@ import AlertContext from "../../../context/alert/alertContext";
 import UserContext from "../../../context/user/userContext";
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-    const toggle = () => {
-        setIsOpen(!isOpen);
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  useEffect(() => {
+    const hideMenu = () => {
+      if (window.innerWidth > 768 && isOpen) {
+        setIsOpen(false);
+        console.log("i resized");
+      }
+    };
+    window.addEventListener("resize", hideMenu);
+
+    return () => {
+      window.removeEventListener("resize", hideMenu);
+    };
+  });
+
+  const alertContext = useContext(AlertContext);
+  const userContext = useContext(UserContext);
+  const history = useHistory();
+
+  const { token, logOutUser } = userContext;
+
+  const reRoute = () => history.push("/");
+
+  const handleClick = () => {
+    console.log("logout clicked");
+
+    const status_message = {
+      status: "Success",
+      message: "User Logged out.",
     };
 
-    useEffect(() => {
-        const hideMenu = () => {
-            if (window.innerWidth > 768 && isOpen) {
-                setIsOpen(false);
-                console.log('i resized');
-            }
-        };
-        window.addEventListener('resize', hideMenu);
-    
-        return () => {
-            window.removeEventListener('resize', hideMenu);
-        };
-    })
+    logOutUser(setAlertReRoute, status_message);
+  };
 
-    const alertContext = useContext(AlertContext);
-    const userContext = useContext(UserContext);
-    const history = useHistory();
+  const setAlertReRoute = (message, statusCode) => {
+    if (message) {
+      alertContext.setAlert({
+        title: message.status,
+        message: message.message,
+      });
+    }
 
-    const { token, logOutUser } = userContext;
+    if (statusCode === 200) {
+      reRoute();
+    }
+  };
 
-    const reRoute = () => history.push("/");
-
-    const handleClick = () => {
-        console.log("logout clicked");
-
-        const status_message = {
-        status: "Success",
-        message: "User Logged out.",
-        };
-
-        logOutUser(setAlertReRoute, status_message);
-    };
-
-    const setAlertReRoute = (message, statusCode) => {
-        if (message) {
-        alertContext.setAlert({
-            title: message.status,
-            message: message.message,
-        });
-        }
-
-        if (statusCode === 200) {
-        reRoute();
-        }
-    };
-
-    return (
+  return (
     <Fragment>
-        <nav
-            className="max-w-7xl  mx-auto px-4 sm:px-6"
-            role="navigation"
-        >
-            <div className="flex justify-between items-center py-6">
-                <Link to="/" className="text-gray-900 text-3xl font-extrabold tracking-tight">
-                    Homie
-                </Link>
-                <div className="px-4 cursor-pointer md:hidden" onClick={toggle}>
-                    <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 6h16M4 12h16M4 18h16"
-                    />
-                    </svg>
-                </div>
-                
-                <div className="md:block hidden">
-                    <Link to="/signin" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-                        Sign In
-                    </Link>
-                    <Link to="/signup" className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-400 hover:bg-red-500">
-                        Sign Up
-                    </Link>
-                </div>
-            </div>
-        </nav>
-        <Dropdown isOpen={isOpen} toggle={toggle} />
-    </Fragment>
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6" role="navigation">
+        <div className="flex justify-between items-center py-6">
+          <Link
+            to="/"
+            className="text-gray-900 text-3xl font-extrabold tracking-tight"
+          >
+            Homie
+          </Link>
+          <div className="px-4 cursor-pointer md:hidden" onClick={toggle}>
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </div>
 
-    );
+          <div className="md:block hidden">
+            <Link
+              to="/signin"
+              className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+            >
+              Sign In
+            </Link>
+            <Link
+              to="/signup"
+              className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-400 hover:bg-red-500"
+            >
+              Sign Up
+            </Link>
+          </div>
+        </div>
+      </nav>
+      <Dropdown isOpen={isOpen} toggle={toggle} />
+    </Fragment>
+  );
 };
 
 export default withRouter(Navbar);
