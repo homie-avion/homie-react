@@ -1,27 +1,22 @@
 import React from 'react'
-import {Container, Row, Col, Card} from 'react-bootstrap'
+// import {Container, Row, Col, Card} from 'react-bootstrap'
 import SignInForm from './signin.form.component'
 
 const SignIn = (props) => {
 
     return (
-        <Container>
-            <Row className="mt-5">
-                <Col>
-                <h1>Insert image here</h1>
-                </Col>
+        <div className="bg-gray-50 min-h-screen flex flex-col">
+            <div className="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
                 
-                <Col className="sign-up-form">
-                    <Card>
-                        <Card.Body>
-                            <SignInForm 
-                                {...props}
-                            />
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
+                <div className="bg-white px-6 py-8 rounded shadow-lg text-black w-full">
+                    <h1 class="mb-8 text-3xl text-center font-bold">Sign In</h1>
+                    <SignInForm 
+                        {...props}
+                    />
+                        
+                </div>
+            </div>
+        </div>
     )
 }
 

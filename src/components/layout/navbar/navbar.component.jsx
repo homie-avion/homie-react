@@ -64,10 +64,10 @@ const Navbar = () => {
     return (
     <Fragment>
         <nav
-            className="max-w-7xl mx-auto px-4 sm:px-6"
+            className="max-w-7xl  mx-auto px-4 sm:px-6"
             role="navigation"
         >
-            <div className="flex justify-between items-center border-b-2 border-gray-100 py-6">
+            <div className="flex justify-between items-center py-6">
                 <Link to="/" className="text-gray-900 text-3xl font-extrabold tracking-tight">
                     Homie
                 </Link>
