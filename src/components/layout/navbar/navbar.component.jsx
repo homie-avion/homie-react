@@ -89,22 +89,54 @@ const Navbar = () => {
           </div>
 
           <div className="md:block hidden">
-            <Link
-              to="/signin"
-              className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/signup"
-              className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-400 hover:bg-red-500"
-            >
-              Sign Up
-            </Link>
+            {
+              !token ?
+              <Fragment>
+                <Link
+                  to="/signin"
+                  className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/signup"
+                  className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-400 hover:bg-red-500"
+                >
+                  Sign Up
+                </Link>
+              </Fragment>
+              :
+              <Fragment>
+                <Link
+                  to="#"
+                  className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  Properties
+                </Link>
+                <Link
+                  to="#"
+                  className="ml-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  Chats
+                </Link>
+                <Link
+                  to="/account"
+                  className="ml-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  Account
+                </Link>
+                <a
+                  onClick={()=>handleClick()}
+                  className="ml-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  Logout
+                </a>
+              </Fragment>
+            }
           </div>
         </div>
       </nav>
-      <Dropdown isOpen={isOpen} toggle={toggle} />
+      <Dropdown isOpen={isOpen} toggle={toggle} token={token} handleClick={handleClick}/>
     </Fragment>
   );
 };

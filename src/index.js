@@ -6,11 +6,7 @@ import App from './App';
 import './index.css';
 // import 'bootstrap/dist/css/bootstrap.min.css'
 
-import UserState from './context/user/UserState'
-
 ReactDOM.render(
-  <UserState>
-    <App />
-  </UserState>,
+    <App />,
   document.getElementById('root')
 );

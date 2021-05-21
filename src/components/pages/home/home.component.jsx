@@ -11,13 +11,13 @@ const Home = () => {
   const { token } = userContext;
 
   if (token) {
-    history.push("/journals");
+    history.push("/account");
   }
 
   return (
     <Fragment>
       <section
-        className="h-screen-70vh bg-no-repeat bg-cover bg-top-center"
+        className="h-screen-70vh bg-no-repeat bg-fixed bg-cover bg-top-center"
         style={{ backgroundImage: "url('assets/img/bg.jpg.webp')" }}
       >
         <div className="container mx-auto h-full flex justify-center items-center">

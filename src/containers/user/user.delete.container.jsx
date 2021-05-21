@@ -34,7 +34,7 @@ const UserDelete = () => {
     }
 
     const button_props_delete = {
-        variant: "danger",
+        variant: "delete-button",
         text: "Delete",
         type: "submit",
         onClick: cbDeleteModal,
@@ -44,7 +44,7 @@ const UserDelete = () => {
     const cbHideModal = () => hideModal()
 
     const button_props_cancel = {
-        variant: "secondary",
+        variant: "secondary-button",
         text: "Cancel",
         type: "button",
         onClick: cbHideModal ,
@@ -55,7 +55,8 @@ const UserDelete = () => {
         button_props_cancel,
         button_props_delete,
         title: "Delete Account",
-        message: `Are you sure you want to delete your account?`
+        message: `Are you sure you want to delete your account?`,
+        hideModal: hideModal
     }
     return (
         <ModalContentDelete {...props}/>

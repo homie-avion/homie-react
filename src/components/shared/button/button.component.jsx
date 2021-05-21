@@ -2,24 +2,27 @@ import React, {Fragment} from 'react'
 // import {Button as ButtonB, Spinner} from 'react-bootstrap'
 
 
-const Button = ({isLoading, text, type, onClick}) => {
+const Button = ({isLoading, text, type, variant, onClick}) => {
     return (
         <button
-            className = "w-full text-center py-3 rounded bg-green-400 text-white hover:bg-green-500 focus:outline-none my-1"
+            className = {variant}
             
             disabled={isLoading}
             type={type}
             onClick={onClick}
         
         >
-            {isLoading 
+            {
+            isLoading 
             ? 
             <Fragment>
-                <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
-                </svg>
-                Processing ...
+            <div className="mr-2 inline-block rounded animate-spin ease duration-300 w-5 h-5 border-2 border-white"></div> Processing ...
             </Fragment>
-            : text} 
+            : 
+            <Fragment>
+                { text}
+            </Fragment>
+            } 
         </button>
     )
 }

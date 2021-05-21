@@ -86,28 +86,28 @@ const UserContainer = () => {
 
     // Inside edit
     const button_props ={
-        variant: "primary",
-        text: "Save",
+        variant: "success-button",
+        text: "Save Changes",
         type: "submit"
     }
 
     const button_props_cancel ={
-        variant: "secondary",
-        text: "Cancel",
+        variant: "secondary-button",
+        text: "Discard",
         type: "button",
         onClick: handleClickEdit
     }
 
     // Inside user page
     const button_props_edit ={
-        variant: "primary",
+        variant: "success-button",
         text: "Edit Account",
         type: "button",
         onClick: handleClickEdit
     }
 
     const button_props_delete = {
-        variant: "danger",
+        variant: "delete-button",
         text: "Delete Account",
         type: "button",
         onClick: handleClickDelete
