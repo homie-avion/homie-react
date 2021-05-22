@@ -2,6 +2,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import Navbar from './components/layout/navbar/navbar.component'
 import Home from './components/pages/home/home.component'
+import Partners from './components/pages/partners/partners.component'
 import Footer from './components/layout/footer/footer.component'
 import NotFound from './components/pages/notfound.component'
 
@@ -35,9 +36,13 @@ function App() {
               <AlertContainer/>
               <Modal/>
               <Switch>
+
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/signup" component={SignUpContainer}/>
                 <Route exact path="/signin" component={SignInContainer}/>
+                
+                <Route exact path="/partners" component={Partners}/>
+                <Route exact path="/partners/signup" component={SignUpContainer}/>
 
                 
                 <Route exact path="/account" component={UserContainer}/>

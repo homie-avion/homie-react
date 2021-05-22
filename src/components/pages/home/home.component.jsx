@@ -22,10 +22,10 @@ const Home = () => {
       >
         <div className="container mx-auto h-full flex justify-center items-center">
           <div className="max-w-5xl flex flex-col justify-center">
-            <h1 className="text-white text-7xl font-extrabold tracking-tight mb-2">
+            <h1 className="text-white text-7xl font-bold tracking-tight mb-2">
               Find your next home!
             </h1>
-            <p className="text-white mb-8">
+            <p className="text-white text-xl font-light mb-8">
               House, condominiums, and apartments for rent.
             </p>
             <Link

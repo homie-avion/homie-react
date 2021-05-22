@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation, Link } from "react-router-dom";
 
 import UserContext from "../../context/user/userContext";
 import AlertContext from "../../context/alert/alertContext";
@@ -10,6 +10,7 @@ const SignUpContainer = () => {
   const alertContext = useContext(AlertContext);
   const userContext = useContext(UserContext);
   const history = useHistory();
+  const location = useLocation();
 
   const { token, isLoading, signUpUser } = userContext;
 
@@ -35,12 +36,26 @@ const SignUpContainer = () => {
         message: "Passwords did not match.",
       });
     } else {
+
+      let role, role_id
+      if (location.pathname === "/signup"){
+        role = "tenant"
+        role_id = 1
+      } else {
+        role = "landlord"
+        role_id = 2
+      }
+
+      data["role"] = role
+
       signUpUser(
         {
           username: data.username,
           password: data.password,
           email: data.email,
-          confirm_password: data.confirmPassword
+          confirm_password: data.confirmPassword,
+          role: data.role,
+          role_id: role_id
         },
         setAlertReRoute
       );

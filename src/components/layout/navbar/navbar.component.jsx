@@ -92,17 +92,23 @@ const Navbar = () => {
             {
               !token ?
               <Fragment>
-                <Link
-                  to="/signin"
-                  className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                  <Link
+                  to="/partners/signup"
+                  className="ml-8 whitespace-nowrap text-base font-light text-gray-400 hover:text-purple-300"
                 >
-                  Sign In
+                  Be one of our partners!
                 </Link>
                 <Link
                   to="/signup"
+                  className="ml-8 whitespace-nowrap text-base font-light text-gray-400 hover:text-green-300"
+                >
+                  Looking for properties? Join us.
+                </Link>
+                <Link
+                  to="/signin"
                   className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-400 hover:bg-red-500"
                 >
-                  Sign Up
+                  Sign In
                 </Link>
               </Fragment>
               :

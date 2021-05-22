@@ -2,6 +2,8 @@ import React, {Fragment} from "react";
 import { Link } from "react-router-dom";
 
 const Dropdown = ({ isOpen, toggle, token, handleClick }) => {
+  const classNameLink = "h-12 flex items-center justify-end whitespace-nowrap text-base font-light text-gray-600 hover:text-gray-900 px-4"
+  
   return (
     <div
       className={ isOpen ? "grid grid-rows-2 items-center bg-white px-6" : "hidden" }
@@ -11,35 +13,47 @@ const Dropdown = ({ isOpen, toggle, token, handleClick }) => {
       !token ?
         <Fragment>
           <Link
-            to="/signin"
-            className="h-12 flex items-center justify-end whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 px-4"
+            to="/partners/signup"
+            className= {classNameLink}
           >
-            Sign In
+            Be one of our partners!
           </Link>
           <Link
             to="/signup"
-            className="h-12 flex items-center justify-end whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 border-b-2 border-gray-100 px-4"
+            className={classNameLink}
           >
-            Sign Up
+            Looking for properties? Join us.
+          </Link>
+          <Link
+            to="/signin"
+            className={classNameLink}
+          >
+            Sign In
           </Link>
         </Fragment>
       :
         <Fragment>
           <Link
             to="#"
-            className="h-12 flex items-center justify-end whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 px-4"
+            className={classNameLink}
           >
             Properties
           </Link>
           <Link
             to="#"
-            className="h-12 flex items-center justify-end whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 border-b-2 border-gray-100 px-4"
+            className={classNameLink}
           >
-            Chat
+            Chats
+          </Link>
+          <Link
+            to="/account"
+            className={classNameLink}
+          >
+            Account
           </Link>
           <a
             onClick={()=>handleClick()}
-            className="h-12 flex items-center justify-end whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 border-b-2 border-gray-100 px-4"
+            className={classNameLink}
           >
             Logout
           </a>
