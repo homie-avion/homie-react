@@ -15,6 +15,8 @@ import Modal from './components/shared/modal/modal.component'
 import SignInContainer from './containers/auth/signin.container'
 import SignUpContainer from './containers/auth/signup.container'
 import UserContainer from './containers/user/user.container'
+import SearchPreferencesContainer from './containers/user/user.searchPreferences.container'
+
 // state
 import UserState from './context/user/UserState'
 import AlertState from './context/alert/AlertState'
@@ -43,8 +45,10 @@ function App() {
                 
                 <Route exact path="/partners" component={Partners}/>
                 <Route exact path="/partners/signup" component={SignUpContainer}/>
-
                 
+            
+
+                <Route exact path="/search_preferences" component={SearchPreferencesContainer}/>
                 <Route exact path="/account" component={UserContainer}/>
 
                 <Route component={NotFound}/>

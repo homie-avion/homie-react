@@ -21,11 +21,11 @@ const SignInContainer = () => {
   // Reroute to page if logged in
   if (token) {
     // history.push("/journals")
-    history.push("/account");
+    history.push("/");
   }
 
   // const reRoute = () => history.push("/journals")
-  const reRoute = () => history.push("/account");
+  const reRoute = () => history.push("/");
 
   const setAlertReRoute = (message, statusCode) => {
     if (message) {

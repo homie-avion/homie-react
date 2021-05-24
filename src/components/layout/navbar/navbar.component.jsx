@@ -94,13 +94,13 @@ const Navbar = () => {
               <Fragment>
                   <Link
                   to="/partners/signup"
-                  className="ml-8 whitespace-nowrap text-base font-light text-gray-400 hover:text-purple-300"
+                  className="ml-8 whitespace-nowrap text-base font-light text-gray-500 hover:text-purple-400"
                 >
                   Be one of our partners!
                 </Link>
                 <Link
                   to="/signup"
-                  className="ml-8 whitespace-nowrap text-base font-light text-gray-400 hover:text-green-300"
+                  className="ml-8 whitespace-nowrap text-base font-light text-gray-500 hover:text-green-400"
                 >
                   Looking for properties? Join us.
                 </Link>

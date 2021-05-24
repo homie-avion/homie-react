@@ -15,7 +15,7 @@ const SignUpContainer = () => {
   const { token, isLoading, signUpUser } = userContext;
 
   if (token) {
-    history.push("/account");
+    history.push("/");
   }
 
   const [email, setEmail] = useState(null);
@@ -25,7 +25,9 @@ const SignUpContainer = () => {
 
   const [mode, setMode] = useState("create");
 
-  const reRoute = () => history.push("/");
+  const reRoute = () => {
+    history.push("/")
+  };
 
   const handleSubmit = (e, data) => {
     e.preventDefault();
