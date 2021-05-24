@@ -184,7 +184,7 @@ const UserState = (props) => {
       payload: { status, message },
     });
 
-    cb({ status, message });
+    cb({ status, message }, res.status );
   };
 
   const deleteUserAccount = async (token, cb) => {

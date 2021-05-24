@@ -20,8 +20,9 @@ const Home = () => {
 
     if (property_type_preference === null && 
         rent_price_preference === null &&
-        length_of_stay_preference === null &&
-        city_preference === null ) {
+        length_of_stay_preference === null 
+        // city_preference === null 
+        ) {
       history.push("/search_preferences");
     } else {
       history.push("/account");

@@ -1,7 +1,8 @@
 import React, {Fragment} from 'react'
 import Button from '../../../shared/button/button.component'
 const Question = (props) => {
-  const { questions, 
+  const { arrayPreferences,
+          questions, 
           options, 
           questionNo,
           handleChange,
@@ -39,7 +40,7 @@ const Question = (props) => {
 
 
   const qLength = Object.keys(questions).length
-  console.log(options)
+
   return (
     <div>
 
@@ -62,7 +63,7 @@ const Question = (props) => {
                   name={questionNo} 
                   value={index1} 
                   required={index1 === 1 && true}
-                  checked={userAnswer[questionNo] === index1 ? true : false}
+                  checked={userAnswer[arrayPreferences[questionNo-1]] === index1 ? true : false}
                   onChange={(e) => handleChange(e)}
                 />
                 <label className="text-black text-xl font-light mb-8" htmlFor={index1}>  {option}</label>
