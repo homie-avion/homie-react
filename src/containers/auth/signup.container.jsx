@@ -41,10 +41,10 @@ const SignUpContainer = () => {
 
       let role, role_id
       if (location.pathname === "/signup"){
-        role = "tenant"
+        role = "user"
         role_id = 1
       } else {
-        role = "landlord"
+        role = "tenant"
         role_id = 2
       }
 

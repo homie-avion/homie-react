@@ -10,6 +10,7 @@ import url from "../url";
 const UserState = (props) => {
   const initialState = {
     user: {},
+    preferences: {},
     token: null,
     isLoading: false,
     message: {},
@@ -65,7 +66,7 @@ const UserState = (props) => {
     if (res.status === 200) {
       dispatch({
         type: SET_USER,
-        payload: result,
+        payload: { data: result.data, token: result.token },
       });
     }
 
@@ -100,7 +101,7 @@ const UserState = (props) => {
 
     dispatch({
       type: SET_USER,
-      payload: result.data ? result : null,
+      payload: result.data ? { data: result.data, token: result.token } : null,
     });
 
     setMessage({ status, message });
@@ -136,7 +137,7 @@ const UserState = (props) => {
 
     dispatch({
       type: SET_USER,
-      payload: { data: null, token: null },
+      payload: { data: {user: null, preferences:null }, token: null },
     });
     // reroute to home
 
@@ -174,7 +175,7 @@ const UserState = (props) => {
       console.log("User's information were updated.");
       dispatch({
         type: SET_USER,
-        payload: { data: result.data, token: token },
+        payload: { data:{ user: result.data }, token: token },
       });
       console.log(result.data);
     }
@@ -240,6 +241,7 @@ const UserState = (props) => {
     <UserContext.Provider
       value={{
         user: state.user,
+        preferences:state.preferences,
         token: state.token,
         isLoading: state.isLoading,
         message: state.message,

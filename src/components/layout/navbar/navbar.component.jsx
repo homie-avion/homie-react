@@ -38,7 +38,7 @@ const Navbar = () => {
   const reRoute = () => history.push("/");
 
   const handleClick = () => {
-    console.log("logout clicked");
+    // console.log("logout clicked");
 
     const status_message = {
       status: "Success",

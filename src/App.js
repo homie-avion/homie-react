@@ -45,8 +45,6 @@ function App() {
                 
                 <Route exact path="/partners" component={Partners}/>
                 <Route exact path="/partners/signup" component={SignUpContainer}/>
-                
-            
 
                 <Route exact path="/search_preferences" component={SearchPreferencesContainer}/>
                 <Route exact path="/account" component={UserContainer}/>

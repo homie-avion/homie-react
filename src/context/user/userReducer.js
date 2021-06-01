@@ -5,7 +5,8 @@ const UserReducer = (state, action) => {
     case SET_USER:
       return {
         ...state,
-        user: action.payload.data,
+        user: action.payload.data.user,
+        preferences: action.payload.data.preferences,
         token: action.payload.token,
         isLoading: false,
       };

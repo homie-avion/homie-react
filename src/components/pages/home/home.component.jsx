@@ -8,20 +8,21 @@ const Home = () => {
   const userContext = useContext(UserContext);
   const history = useHistory();
 
-  const { token, user } = userContext;
+  const { token, user, preferences } = userContext;
   if (token && user) {
 
     const { 
-            property_type_preference,
-            rent_price_preference,
-            length_of_stay_preference,
-            city_preference,
-          } = user
+            property_type,
+            rent,
+            stay_period,
+            city,
+          } = preferences
 
-    if (property_type_preference === null && 
-        rent_price_preference === null &&
-        length_of_stay_preference === null 
-        // city_preference === null 
+    // console.log(property_type.length )
+    if (property_type.length === 0 && 
+        rent.length === 0 &&
+        stay_period.length === 0 &&
+        city.length === 0
         ) {
       history.push("/search_preferences");
     } else {
