@@ -3,7 +3,7 @@ import { useReducer, useEffect } from "react";
 import UserContext from "./userContext";
 import UserReducer from "./userReducer";
 
-import { SET_USER, SET_LOADING, SET_MESSAGE } from "../types";
+import { SET_USER, SET_USER_PREFERENCES, SET_LOADING, SET_MESSAGE } from "../types";
 
 import url from "../url";
 
@@ -151,7 +151,6 @@ const UserState = (props) => {
 
   const updateUserAccount = async (data, token, cb) => {
     setIsLoading();
-    console.log(data);
     let res;
     try {
       res = await fetch(`${url}/user`, {
@@ -187,6 +186,44 @@ const UserState = (props) => {
 
     cb({ status, message }, res.status );
   };
+
+  const updateUserPreferences = async (data, token, cb) =>{
+    setIsLoading();
+    let res;
+    try {
+      res = await fetch(`${url}/update_preferences`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    const result = await res.json();
+    const { status, message } = result;
+
+    console.log(res.status);
+
+    if (res.status === 200) {
+      console.log("update_preferences's information were updated.");
+      dispatch({
+        type: SET_USER_PREFERENCES,
+        payload: result.data,
+      });
+      console.log(result.data);
+    }
+
+    dispatch({
+      type: SET_MESSAGE,
+      payload: { status, message },
+    });
+
+    cb({ status, message }, res.status );
+  }
 
   const deleteUserAccount = async (token, cb) => {
     setIsLoading();
@@ -250,6 +287,7 @@ const UserState = (props) => {
         autoLogin,
         logOutUser,
         updateUserAccount,
+        updateUserPreferences,
         deleteUserAccount,
         setIsLoading,
         clearMessage,

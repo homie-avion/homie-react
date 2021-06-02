@@ -1,5 +1,6 @@
 // User
 export const SET_USER = 'SET_USER';
+export const SET_USER_PREFERENCES = 'SET_USER_PREFERENCES';
 export const SET_LOADING = 'SET_LOADING';
 
 // Alert

@@ -1,4 +1,4 @@
-import { SET_USER, SET_LOADING, SET_MESSAGE } from "../types";
+import { SET_USER, SET_USER_PREFERENCES, SET_LOADING, SET_MESSAGE } from "../types";
 
 const UserReducer = (state, action) => {
   switch (action.type) {
@@ -9,6 +9,12 @@ const UserReducer = (state, action) => {
         preferences: action.payload.data.preferences,
         token: action.payload.token,
         isLoading: false,
+      };
+    case SET_USER_PREFERENCES:
+      return {
+        ...state,
+        preferences: action.payload,
+        isLoading: false
       };
     case SET_MESSAGE:
       return {

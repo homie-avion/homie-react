@@ -7,7 +7,7 @@ const Question = (props) => {
           questionNo,
           handleChange,
           handleSubmit,
-          userAnswer,
+          finalAnswer,
           nextQuestion,
           prevQuestion,} = props
 
@@ -50,20 +50,30 @@ const Question = (props) => {
         {questions[questionNo]}
         </h3>
         <p className="text-gray-500 text-xl font-light mb-8">
-          Choose only one.
+          { arrayPreferences[questionNo-1] === "city" ? "You can select many" : "Choose only one."}
         </p>
         <div className="mb-8">
           {
+            
             options[questionNo].map((option, index) => {
               let index1 = index + 1
+              let category = arrayPreferences[questionNo-1]
+              let value_no = finalAnswer[category]
+              console.log(value_no, category)
+            
               return (<Fragment key={index1}>
                 <input 
                   type="radio" 
                   id={index1} 
-                  name={questionNo} 
+                  name={category === "city" ? category+index1: category} 
+                  data-anchor={questionNo}
                   value={index1} 
                   required={index1 === 1 && true}
-                  checked={userAnswer[arrayPreferences[questionNo-1]] === index1 ? true : false}
+                  checked={ value_no ? 
+                            value_no.includes(index1) ? true : value_no.length === 0 && option === "Any" && true
+                            : 
+                            option === "Any" && true  // default
+                          }
                   onChange={(e) => handleChange(e)}
                 />
                 <label className="text-black text-xl font-light mb-8" htmlFor={index1}>  {option}</label>

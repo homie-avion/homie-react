@@ -10,7 +10,7 @@ const Home = () => {
 
   const { token, user, preferences } = userContext;
   if (token && user) {
-
+    console.log(preferences)
     const { 
             property_type,
             rent,
