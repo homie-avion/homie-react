@@ -59,7 +59,7 @@ const Question = (props) => {
               let index1 = index + 1
               let category = arrayPreferences[questionNo-1]
               let value_no = finalAnswer[category]
-              console.log(value_no, category)
+              // console.log(value_no, category)
             
               return (<Fragment key={index1}>
                 <input 

@@ -35,7 +35,7 @@ const SearchPreferencesContainer = () => {
         setFinalAnswer(finalAnswer => ({ ...finalAnswer, [prefer]: preferences[prefer] }))
       })
     }
-  },[])
+  },[user])
   
 
   const reRoute = () => history.push("/account")

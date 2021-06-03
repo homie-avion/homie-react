@@ -206,7 +206,7 @@ const UserState = (props) => {
     const result = await res.json();
     const { status, message } = result;
 
-    console.log(res.status);
+    console.log(result.data);
 
     if (res.status === 200) {
       console.log("update_preferences's information were updated.");
