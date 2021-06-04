@@ -212,9 +212,9 @@ const UserState = (props) => {
       console.log("update_preferences's information were updated.");
       dispatch({
         type: SET_USER_PREFERENCES,
-        payload: result.data,
+        payload: result.data.preferences,
       });
-      console.log(result.data);
+      // console.log(result.data);
     }
 
     dispatch({

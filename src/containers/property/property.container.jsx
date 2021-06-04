@@ -17,12 +17,12 @@ const PropertyContainer = () => {
   useEffect(()=>{
     // console.log(user)
     // console.log(token)
-    if (token && preferences ) {
-      console.log(preferences)
+    if (token && Object.keys(preferences).length != 0) {
+      // console.log(preferences)
       getProperties(page, preferences,token)
     }
     
-  }, [])
+  }, [preferences])
 
   return (
 

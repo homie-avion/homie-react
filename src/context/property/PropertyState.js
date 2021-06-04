@@ -19,18 +19,27 @@ const PropertyState = (props) => {
   const getProperties = async(page, preferences, token) => {
     setIsLoading();
 
-    let query_params_input = Object.keys(preferences).map((key) => {
-      return {[key+"_id"] : preferences[key]}
-    })
-    const query_params = new URLSearchParams({...query_params_input, page:page})
-    console.log(`${url}/recommendations?${query_params}`)
+    let f_preferences = {}
+    for (const key in preferences){
+      if (preferences[key].length === 0) {
+        continue
+      } else {
+        f_preferences[key+"_id"] = preferences[key]
+      }
+    }
+
+    f_preferences = {...f_preferences, page: page}
+    console.log(f_preferences)
+    console.log(`${url}/recommendations$`)
     let res ;
     try {
-      res = await fetch(`${url}/recommendations?${query_params}`,{
-        method: "GET",
+      res = await fetch(`${url}/recommendations?`,{
+        method: "POST",
         headers: {
+          "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
-        }
+        },
+        body: JSON.stringify(f_preferences),
       })
     } catch (error) {
       console.log(error);
