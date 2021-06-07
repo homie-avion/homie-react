@@ -17,6 +17,7 @@ import SignUpContainer from './containers/auth/signup.container'
 import UserContainer from './containers/user/user.container'
 import SearchPreferencesContainer from './containers/user/user.searchPreferences.container'
 import PropertyContainer from './containers/property/property.container'
+import SinglePropertyContainer from './containers/property/single_property.container'
 
 // state
 import UserState from './context/user/UserState'
@@ -51,6 +52,9 @@ function App() {
 
                   <Route exact path="/search_preferences" component={SearchPreferencesContainer}/>
                   <Route exact path="/recommendations" component={PropertyContainer}/>
+                  <Route exact path="/recommendations/:id" component={SinglePropertyContainer}/>
+                  <Route exact path="/properties" component={PropertyContainer}/>
+                  <Route exact path="/properties/:id" component={SinglePropertyContainer}/>
                   <Route exact path="/account" component={UserContainer}/>
 
                   <Route component={NotFound}/>

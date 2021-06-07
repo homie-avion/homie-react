@@ -1,4 +1,4 @@
-import { SET_PROPERTIES, SET_MESSAGE, SET_LOADING} from '../types';
+import { SET_PROPERTIES, SET_PROPERTY, SET_MESSAGE, SET_LOADING} from '../types';
 
 const PropertyReducer = (state, action) => {
   switch (action.type){
@@ -6,9 +6,17 @@ const PropertyReducer = (state, action) => {
       return {
         ...state,
         // properties : action.payload.data ? [] : [...state.properties, action.payload.data],
-        properties : action.payload,
+        page: action.payload.page,
+        properties : action.payload.data,
         isloading: false
       };
+    case SET_PROPERTY:
+      return {
+        ...state,
+        property_id: action.payload.id,
+        property: action.payload.data,
+        isloading: false
+      }
     case SET_MESSAGE:
       return {
         ...state,

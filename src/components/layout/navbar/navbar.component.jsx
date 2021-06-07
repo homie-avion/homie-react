@@ -7,6 +7,7 @@ import Dropdown from "./dropdown.component";
 //context
 import AlertContext from "../../../context/alert/alertContext";
 import UserContext from "../../../context/user/userContext";
+import PropertyContext from "../../../context/property/propertyContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,10 +32,19 @@ const Navbar = () => {
 
   const alertContext = useContext(AlertContext);
   const userContext = useContext(UserContext);
+  const propertyContext = useContext(PropertyContext);
   const history = useHistory();
 
-  const { token, logOutUser } = userContext;
-
+  const { user, token, logOutUser } = userContext;
+  const { unsetProperties } = propertyContext;
+  
+  let role
+  if (user) {
+    role = user.role
+  } else {
+    role = null
+  }
+  
   const reRoute = () => history.push("/");
 
   const handleClick = () => {
@@ -46,6 +56,7 @@ const Navbar = () => {
     };
 
     logOutUser(setAlertReRoute, status_message);
+    unsetProperties();
   };
 
   const setAlertReRoute = (message, statusCode) => {
@@ -113,17 +124,12 @@ const Navbar = () => {
               </Fragment>
               :
               <Fragment>
+                
                 <Link
-                  to="#"
+                  to={role === "user" ? "/recommendations" : "/properties"}
                   className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
                 >
-                  Properties
-                </Link>
-                <Link
-                  to="#"
-                  className="ml-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
-                >
-                  Chats
+                  {role === "user" ? "Recommendations" : "Properties"}
                 </Link>
                 <Link
                   to="/account"
@@ -142,7 +148,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <Dropdown isOpen={isOpen} toggle={toggle} token={token} handleClick={handleClick}/>
+      <Dropdown role={role} isOpen={isOpen} toggle={toggle} token={token} handleClick={handleClick}/>
     </Fragment>
   );
 };

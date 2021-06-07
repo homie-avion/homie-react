@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import { Link } from "react-router-dom";
 
-const Dropdown = ({ isOpen, toggle, token, handleClick }) => {
+const Dropdown = ({ role , isOpen, toggle, token, handleClick }) => {
   const classNameLink = "h-12 flex items-center justify-end whitespace-nowrap text-base font-light text-gray-600 hover:text-gray-900 px-4"
   
   return (
@@ -34,16 +34,10 @@ const Dropdown = ({ isOpen, toggle, token, handleClick }) => {
       :
         <Fragment>
           <Link
-            to="#"
+            to={role === "user" ? "/recommendations" : "/properties"}
             className={classNameLink}
           >
-            Properties
-          </Link>
-          <Link
-            to="#"
-            className={classNameLink}
-          >
-            Chats
+            {role === "user" ? "Recommendations" : "Properties"}
           </Link>
           <Link
             to="/account"

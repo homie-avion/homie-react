@@ -33,7 +33,7 @@ const PropertyCard = ({ property }) => {
   const city_name =
     complete_address.split(", ")[complete_address.split(", ").length - 1];
 
-  console.log(complete_address.split(", "));
+  // console.log(complete_address.split(", "));
   return (
     <div className="flex flex-col mb-6">
       <div className="bg-white shadow-md  rounded-3xl p-4">
@@ -102,7 +102,7 @@ const PropertyCard = ({ property }) => {
                   <span className="text-green-400 hover:text-green-500 rounded-lg">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="icon icon-tabler icon-tabler-home"
+                      className="icon icon-tabler icon-tabler-home"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"

@@ -26,7 +26,10 @@ const Home = () => {
         ) {
       history.push("/search_preferences");
     } else {
-      history.push("/account");
+      user.role === "user" ?
+        history.push("/recommendations")
+      :
+        history.push("/properties")
     }
   }
 

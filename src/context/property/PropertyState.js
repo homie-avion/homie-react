@@ -3,13 +3,16 @@ import {useReducer} from "react";
 import PropertyContext from './propertyContext'
 import PropertyReducer from './propertyReducer'
 
-import {SET_PROPERTIES, SET_MESSAGE, SET_LOADING} from '../types'
+import {SET_PROPERTIES, SET_PROPERTY, SET_MESSAGE, SET_LOADING} from '../types'
 
 import url from "../url";
 
 const PropertyState = (props) => {
   const initialState = {
+    page : null,
     properties: [],
+    property_id: null,
+    property: {},
     message: false,
     isLoading: false,
   }
@@ -33,7 +36,7 @@ const PropertyState = (props) => {
     console.log(`${url}/recommendations$`)
     let res ;
     try {
-      res = await fetch(`${url}/recommendations?`,{
+      res = await fetch(`${url}/recommendations`,{
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -49,9 +52,45 @@ const PropertyState = (props) => {
     console.log(result)
     dispatch({
       type: SET_PROPERTIES,
-      payload: result.data
+      payload: {
+        page: page,
+        data: result.data
+      }
     })
 
+  }
+
+  const getProperty = async(id, token) => {
+    setIsLoading();
+
+    console.log(`${url}/recommendations`)
+    let res ;
+    try {
+      res = await fetch(`${url}/property/${id}`,{
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        }
+      })
+    } catch (error) {
+      console.log(error);
+    }
+
+    const result = await res.json();
+    console.log(result)
+    dispatch({
+      type: SET_PROPERTY,
+      payload: {
+        id: id,
+        data: result.data
+      }
+    })
+  }
+
+  const unsetProperties = () => {
+    dispatch({ type: SET_PROPERTIES, payload: {data: [], page: null} });
+    dispatch({ type: SET_PROPERTY, payload:  {data: {}, id: null} });
   }
 
   const setMessage = (data) => {
@@ -70,10 +109,15 @@ const PropertyState = (props) => {
   return (
     <PropertyContext.Provider
       value= {{
+        page: state.page,
         properties: state.properties,
+        property_id: state.property_id,
+        property: state.property,
         message: state.message,
         isLoading: state.isLoading,
         getProperties,
+        getProperty,
+        unsetProperties
       }}
     >
       {props.children}

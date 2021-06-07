@@ -5,6 +5,7 @@ export const SET_LOADING = 'SET_LOADING';
 
 // Property
 export const SET_PROPERTIES = "SET_PROPERTIES"
+export const SET_PROPERTY = "SET_PROPERTY"
 // export const SET_LOADING
 
 
