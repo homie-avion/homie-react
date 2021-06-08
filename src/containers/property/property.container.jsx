@@ -17,9 +17,9 @@ const PropertyContainer = () => {
   useEffect(()=>{
     // console.log(user)
     // console.log(token)
-    if (token && Object.keys(preferences).length != 0) {
+    if (token && user && Object.keys(preferences).length != 0) {
       // console.log(preferences)
-      getProperties(page, preferences,token)
+      getProperties(user, page, preferences, token)
     }
     
   }, [preferences])
@@ -28,6 +28,7 @@ const PropertyContainer = () => {
 
     <Property
       properties = {properties}
+      user = {user}
     />
 
   )

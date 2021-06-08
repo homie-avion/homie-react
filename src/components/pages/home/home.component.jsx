@@ -10,7 +10,7 @@ const Home = () => {
 
   const { token, user, preferences } = userContext;
   if (token && user) {
-    console.log(preferences)
+    
     const { 
             property_type,
             rent,
@@ -22,7 +22,8 @@ const Home = () => {
     if (property_type.length === 0 && 
         rent.length === 0 &&
         stay_period.length === 0 &&
-        city.length === 0
+        city.length === 0 &&
+        user.role === "user"
         ) {
       history.push("/search_preferences");
     } else {
@@ -36,7 +37,7 @@ const Home = () => {
   return (
     <Fragment>
       <section
-        className="h-screen-70vh bg-no-repeat bg-fixed bg-cover bg-top-center"
+        className="h-screen bg-no-repeat bg-fixed bg-cover bg-top-center"
         style={{ backgroundImage: "url('assets/img/bg.jpg.webp')" }}
       >
         <div className="container mx-auto h-full flex justify-center items-center">
@@ -56,17 +57,20 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="h-screen">
-        <div className="container mx-auto h-full">
-          <div className="">
-            <div className="">
-              <h2>Properties in various cities in NCR</h2>
-              <p>Choose your city!</p>
-            </div>
-            <div></div>
-          </div>
-        </div>
-      </section>
+      {
+        // <section className="h-screen">
+        //   <div className="container mx-auto h-full">
+        //     <div className="">
+        //       <div className="">
+        //         <h2>Properties in various cities in NCR</h2>
+        //         <p>Choose your city!</p>
+        //       </div>
+        //       <div></div>
+        //     </div>
+        //   </div>
+        // </section>
+
+      }
     </Fragment>
   );
 };

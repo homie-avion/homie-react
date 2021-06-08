@@ -32,7 +32,7 @@ const SingleProperty = ({property}) => {
   // const 
   
   const [picNo, setPicNo] = useState(1)
-  console.log(picture_urls)
+  // console.log(picture_urls)
 
   var formatter = Intl.NumberFormat('en-US')
 
@@ -42,7 +42,9 @@ const SingleProperty = ({property}) => {
   const handleClick = (e) => {
     e.preventDefault()
     console.log(e.target.attributes["data-target"].value)
-    setPicNo(e.target.attributes["data-target"].value)
+    setPicNo(parseInt(e.target.attributes["data-target"].value))
+    
+    // console.log(picNo, e.target.attributes["data-target"].value)
   }
 
 
@@ -59,10 +61,10 @@ const SingleProperty = ({property}) => {
               <div className="h-64 md:h-80 rounded-lg bg-gray-100 mb-4">
                 <img
                   src={
-                    `https://picsum.photos/id/${picNo - 1}/640/360.jpg`
+                    `https://picsum.photos/id/${id + picNo}/640/360.jpg`
                   }
                   alt="random"
-                  className="w-full h-64 md:h-80 rounded-lg bg-gray-100 mb-4"
+                  className="bg-no-repeat bg-center w-full h-64 md:h-80 rounded-lg bg-gray-100 mb-4"
                 />
               </div>
 
@@ -70,15 +72,15 @@ const SingleProperty = ({property}) => {
               
               {
                 picture_urls.map((value, index) =>{
-                  // console.log(index, picNo)
+                  console.log(index, picNo)
                   return (<div key={index + 1} className="flex-1 px-2">
                       <button 
-                        style={{background:`url(https://picsum.photos/id/${index + 1}/640/360.jpg)`}}
+                        style={{backgroundImage:`url(https://picsum.photos/id/${ id + index + 1}/186/128.jpg)`}}
                         // x-on:click="image = i" :className="{ 'ring-2 ring-indigo-300 ring-inset': image === i }" 
                         onClick = {(e) => handleClick(e)}
                         data-target={index + 1}
-                        className={"focus:outline-none w-full rounded-lg h-24 md:h-32 bg-gray-100 flex items-center justify-center " +
-                          (picNo === index + 1 && "ring-4 ring-indigo-400 ring-inset")}
+                        className={"bg-no-repeat bg-center focus:outline-none w-full rounded-lg h-24 md:h-32 bg-gray-100 flex items-center justify-center " +
+                          (picNo === (index + 1) ? "ring-4 ring-indigo-400 ring-inset" : "")}
                         >
                       </button>
                     </div>)
@@ -109,8 +111,8 @@ const SingleProperty = ({property}) => {
               }
             </div>
 
-            
-            <div className="flex-1 inline-flex items-center">
+            <p className="text-gray-500 mb-4">Lorem ipsum, dolor sit, amet consectetur adipisicing elit. Vitae exercitationem porro saepe ea harum corrupti vero id laudantium enim, libero blanditiis expedita cupiditate a est.</p>
+            <div className="flex-1 inline-flex items-center mb-4">
               <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 mr-3"
@@ -134,7 +136,7 @@ const SingleProperty = ({property}) => {
               <p className="">{city_name}</p>
               <br/>
             </div>
-              <p className="text-gray-500">{complete_address}</p>
+            <p className="text-gray-500">{complete_address}</p>
 
             <div className="flex justify-end py-4 space-x-4">
 

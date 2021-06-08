@@ -44,7 +44,7 @@ const SignUpContainer = () => {
         role = "user"
         role_id = 1
       } else {
-        role = "tenant"
+        role = "partner"
         role_id = 2
       }
 

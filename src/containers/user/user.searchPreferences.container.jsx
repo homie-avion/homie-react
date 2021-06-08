@@ -38,7 +38,7 @@ const SearchPreferencesContainer = () => {
   },[user])
   
 
-  const reRoute = () => history.push("/account")
+  const reRoute = () => history.push("/")
 
   const resetQuestion = () => {
     setQuestionNo(1)

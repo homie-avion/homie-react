@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
-const PropertyCard = ({ property }) => {
+const PropertyCard = ({ property, user }) => {
   const {
     id,
     name,
@@ -40,7 +41,7 @@ const PropertyCard = ({ property }) => {
         <div className="flex-none lg:flex">
           <div className=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
             <img
-              src={picture_urls[0] + "?random=" + id}
+              src={`https://picsum.photos/id/${id}/640/360.jpg`}
               alt="Just a flower"
               className=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl"
             />
@@ -121,13 +122,19 @@ const PropertyCard = ({ property }) => {
                   <span> {tenant_count} Units Available</span>
                 </button>
               </div>
-              <button
-                className="mb-2 md:mb-0 bg-blue-600 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-400"
-                type="button"
-                aria-label="like"
-              >
-                Look
-              </button>
+              <Link to={user.role === "user" ? 
+                `/recommendations/${id}`
+                :
+                `/properties/${id}`
+                }>
+                <button
+                  className="mb-2 md:mb-0 bg-blue-600 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-400"
+                  type="button"
+                  aria-label="like"
+                >
+                  Look
+                </button>
+              </Link>
             </div>
           </div>
         </div>
