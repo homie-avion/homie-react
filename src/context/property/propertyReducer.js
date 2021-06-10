@@ -8,14 +8,14 @@ const PropertyReducer = (state, action) => {
         // properties : action.payload.data ? [] : [...state.properties, action.payload.data],
         page: action.payload.page,
         properties : action.payload.data,
-        isloading: false
+        isLoading: false
       };
     case SET_PROPERTY:
       return {
         ...state,
         property_id: action.payload.id,
         property: action.payload.data,
-        isloading: false
+        isLoading: false
       }
     case SET_MESSAGE:
       return {

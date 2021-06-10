@@ -46,7 +46,7 @@ const PropertyCard = ({ property, user }) => {
               className=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl"
             />
           </div>
-          <div className="flex-auto ml-3 justify-evenly py-2">
+          <div className="flex flex-auto flex-col ml-3 justify-between">
             <div className="flex flex-wrap ">
               <div className="w-full flex-none text-xs text-blue-700 font-medium ">
                 {"Property"}
@@ -97,8 +97,8 @@ const PropertyCard = ({ property, user }) => {
               </div>
             </div>
             <div className="flex p-4 pb-2 border-t border-gray-200 "></div>
-            <div className="flex space-x-3 text-sm font-medium">
-              <div className="flex-auto flex space-x-3">
+            <div className="flex items-center space-x-3 text-sm font-medium">
+              <div className="flex-auto space-x-3">
                 <button className="mb-2 md:mb-0 bg-white px-5 py-2 shadow-sm tracking-wider border text-gray-600 rounded-full hover:bg-gray-100 inline-flex items-center space-x-2 ">
                   <span className="text-green-400 hover:text-green-500 rounded-lg">
                     <svg
@@ -119,7 +119,7 @@ const PropertyCard = ({ property, user }) => {
                       <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path>
                     </svg>
                   </span>
-                  <span> {tenant_count} Units Available</span>
+                  <span> {tenant_count  === 1 ? "1 Unit" : tenant_count+" Units"} Available</span>
                 </button>
               </div>
               <Link to={user.role === "user" ? 

@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import { useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 import PropertyForm from '../../components/pages/app/property/property_form.component'
 
@@ -9,7 +9,7 @@ import AlertContext from "../../context/alert/alertContext";
 
 
 const CreatePropertyContainer = () => {
-
+  
   const history = useHistory()
   const userContext = useContext(UserContext)
   const propertyContext = useContext(PropertyContext)
@@ -29,8 +29,8 @@ const CreatePropertyContainer = () => {
         message: message.message,
       });
     }
-
-    if (statusCode === 201) {
+    // console.log(statusCode)
+    if (statusCode === 201 || statusCode === 200) {
       reRoute()
     }
   }
@@ -39,7 +39,7 @@ const CreatePropertyContainer = () => {
 
     e.preventDefault()
     data["user_id"] = user.id
-    data["complete_address"] = data.bldg_no + "," + data.street + "," + data.barangay + "," + data.city
+    data["complete_address"] = data.bldg_no + ", " + data.street + ", " + data.barangay + ", " + data.city
     
     // delete data.city
     console.log(data)

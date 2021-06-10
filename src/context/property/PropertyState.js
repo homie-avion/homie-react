@@ -130,9 +130,34 @@ const PropertyState = (props) => {
         type: SET_MESSAGE,
         payload: {status, message}
     })
+    
+    cb({status, message}, res.status )
 
-    cb({status, message})
+  }
 
+  const deleteProperty = async(user, id, token, cb) => {
+    setIsLoading()
+
+    const res = await fetch(`${url}/properties/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+
+    if (res.status === 200 ){
+        console.log('Property deleted.')
+        getProperties(user, 1, null, token)
+
+    } else{
+        console.log('Error in deleting this property.')
+    }
+
+    const result = await res.json()
+    // For error message
+    const {status, message} = result
+
+    cb({status, message}, res.status)
   }
 
   const unsetProperties = () => {
@@ -165,6 +190,7 @@ const PropertyState = (props) => {
         getProperties,
         getProperty,
         createProperty,
+        deleteProperty,
         unsetProperties
       }}
     >

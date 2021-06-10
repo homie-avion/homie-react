@@ -10,6 +10,23 @@ import UserContext from "../../../context/user/userContext";
 import PropertyContext from "../../../context/property/propertyContext";
 
 const Navbar = () => {
+  const alertContext = useContext(AlertContext);
+  const userContext = useContext(UserContext);
+  const propertyContext = useContext(PropertyContext);
+  const history = useHistory();
+
+  const { user, token, logOutUser } = userContext;
+  const { unsetProperties } = propertyContext;
+  
+  const protected_pages = [ "/recommendations", "/properties",
+                            "/create_property", "/search_preferences", "/account"]
+
+  const protected_partner_pages = ["/properties", "/create_property"]
+  const protected_user_pages = ["/search_preferences"]
+
+
+
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => {
@@ -30,14 +47,7 @@ const Navbar = () => {
     };
   });
 
-  const alertContext = useContext(AlertContext);
-  const userContext = useContext(UserContext);
-  const propertyContext = useContext(PropertyContext);
-  const history = useHistory();
 
-  const { user, token, logOutUser } = userContext;
-  const { unsetProperties } = propertyContext;
-  
   let role
   if (user) {
     role = user.role
@@ -72,6 +82,27 @@ const Navbar = () => {
     }
   };
 
+  if (token === null && protected_pages.includes(history.location.pathname)){
+    history.push("/")
+  }
+
+  if (user.role) {
+    if (user.role === "user" && protected_partner_pages.includes(history.location.pathname)) {
+      history.push("/")
+    }
+    if (user.role === "partner" && protected_user_pages.includes(history.location.pathname)) {
+      history.push("/")
+    }
+
+    if (user.role === "user" && history.location.pathname.includes("/properties")) {
+      history.push("/")
+    }
+    
+    if (user.role === "partner" && history.location.pathname.includes("/recommendations")) {
+      history.push("/")
+    }
+
+  } 
   return (
     <Fragment>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6" role="navigation">
@@ -155,30 +186,3 @@ const Navbar = () => {
 
 export default withRouter(Navbar);
 
-// <NavbarB collapseOnSelect expand="lg" bg="dark" variant="dark">
-//     <div className="container d-flex">
-//         <NavbarB.Brand as={Link} to="/"><h2><i className="far fa-calendar-check"></i> TaskTracker</h2></NavbarB.Brand>
-//         <NavbarB.Toggle aria-controls="responsive-navbar-nav" />
-//         <NavbarB.Collapse id="responsive-navbar-nav">
-//             <Nav className="ml-auto">
-//             {
-//                 token ?
-//                 <Fragment>
-//                     <Nav.Link as={Link} to="/journals">Journals</Nav.Link>
-//                     {
-//                     <Nav.Link as={Link} to="/account">Account</Nav.Link>
-//                     }
-//                     <Nav.Link onClick={()=>handleClick()}>Logout</Nav.Link>
-//                 </Fragment>
-//                 :
-//                 <Fragment>
-//                     <Nav.Link as={Link} to="/about">About</Nav.Link>
-//                     <Nav.Link as={Link} to="/signup">SignUp</Nav.Link>
-//                     <Nav.Link as={Link} to="/signin">SignIn</Nav.Link>
-//                 </Fragment>
-//             }
-//             </Nav>
-//         </NavbarB.Collapse>
-
-//     </div>
-// </NavbarB>

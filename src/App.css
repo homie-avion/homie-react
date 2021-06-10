@@ -10,7 +10,8 @@
 }
 
 .delete-button{
-  @apply flex justify-center items-center  w-full text-center px-4 py-3 rounded bg-red-400 text-white hover:bg-red-500 focus:outline-none my-1;
+  /* @apply flex justify-center items-center  w-full text-center px-4 py-3 rounded bg-red-400 text-white hover:bg-red-500 focus:outline-none my-1; */
+  @apply flex justify-center items-center w-full text-center px-4 py-3 rounded bg-transparent text-red-500 hover:bg-red-500 hover:text-white border border-red-500 hover:border-transparent focus:outline-none my-1;
 }
 
 .success-button{

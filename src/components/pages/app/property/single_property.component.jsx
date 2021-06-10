@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import Button from '../../../shared/button/button.component'
 
+import MapComponent from '../../../shared/map/map.component'
 
-const SingleProperty = ({property}) => {
+const SingleProperty = ({property , role , button_props_delete, isLoading}) => {
   const {
     id,
     name,
@@ -52,7 +54,7 @@ const SingleProperty = ({property}) => {
     <div className="bg-gray-50 min-h-screen h-auto flex flex-col">
     
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-        <div className="flex flex-col md:flex-row -mx-4">
+        <div className="flex flex-col md:flex-row -mx-4 mb-10">
           <div className="md:flex-1 px-4">
             <div 
               x-data="{ image: 1 }" 
@@ -139,12 +141,26 @@ const SingleProperty = ({property}) => {
             <p className="text-gray-500">{complete_address}</p>
 
             <div className="flex justify-end py-4 space-x-4">
-
-              <button type="button" className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
-                Chat with our Partner
-              </button>
+              {
+                role === "user" ?
+                  <button type="button" className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
+                    Chat with our Partner
+                  </button>
+                :
+                  // Edit and Delete property button
+                  
+                  
+                  <div className="w-1/3">
+                    <Button {...button_props_delete} isLoading={isLoading} />
+                  </div>
+                  
+              }
             </div>
           </div>
+        </div>
+
+        <div className= " mb-10 rounded-lg">
+          <MapComponent latitude={latitude} longitude={longitude}/>
         </div>
       </div>
     </div>

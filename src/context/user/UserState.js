@@ -62,8 +62,8 @@ const UserState = (props) => {
 
     const { status, message } = result;
     // console.log(status ,message)
-    result.data.user["role"] = result.data.role
     if (res.status === 200) {
+      result.data.user["role"] = result.data.role
       dispatch({
         type: SET_USER,
         payload: { data: result.data, token: result.token },
@@ -98,11 +98,14 @@ const UserState = (props) => {
     const { status, message } = result;
     // console.log(res.status);
     // console.log(result);
-    result.data.user["role"] = result.data.role
-    dispatch({
-      type: SET_USER,
-      payload: result.data ? { data: result.data, token: result.token } : null,
-    });
+    if (res.status === 200) {
+      result.data.user["role"] = result.data.role
+      dispatch({
+        type: SET_USER,
+        payload: result.data ? { data: result.data, token: result.token } : null,
+      });
+    }
+
 
     setMessage({ status, message });
 
@@ -123,13 +126,15 @@ const UserState = (props) => {
     } catch (error) {
       console.log(error);
     }
-
     const result = await res.json();
-    result.data.user["role"] = result.data.role
-    dispatch({
-      type: SET_USER,
-      payload: result.data ? { data: result.data, token: token } : null,
-    });
+
+    if (res.status === 200) {
+      result.data.user["role"] = result.data.role
+      dispatch({
+        type: SET_USER,
+        payload: result.data ? { data: result.data, token: token } : null,
+      });
+    }
   };
 
   const logOutUser = (cb, status_message) => {
@@ -167,10 +172,10 @@ const UserState = (props) => {
 
     const result = await res.json();
     const { status, message } = result;
-    result.data.user["role"] = result.data.role
     console.log(res.status);
-
+    
     if (res.status === 200) {
+      result.data.user["role"] = result.data.role
       console.log("User's information were updated.");
       dispatch({
         type: SET_USER,

@@ -12,11 +12,24 @@ const PropertyForm = (props) => {
       setData(data => ({...data, [event.target.name] : parseInt(event.target.getAttribute("data-anchor"))}))
       
       if (event.target.name === "city_id"){
-        setData(data => ({...data, "city" : parseInt(event.target.getAttribute("data-name"))}))
+        const city_name = event.target.getAttribute("data-name")
+        setData(data => ({...data, 
+                          "city" : city_name
+                        }))
+        if (Object.keys(data).includes("latitude") === false || !data["latitude"]){
+          setData(data => ({...data, 
+            "latitude" : parseInt(cities_info[city_name]["latitude"])
+          }))
+        }
+        if (Object.keys(data).includes("longitude") === false || !data["longitude"]){
+          setData(data => ({...data,
+            "longitude" : parseInt(cities_info[city_name]["longitude"])
+          }))
+        }
+        console.log(data)      
       }
 
     } else{
-      // console.log(event.target.name, event.target.value)
       if (event.target.type === "number") {
 
         setData(data => ({...data, [event.target.name] : parseInt(event.target.value)}))
@@ -45,8 +58,21 @@ const PropertyForm = (props) => {
 
   const cities = ["Quezon City", "Makati City", "Mandaluyong City",
                   "San Juan City", "Taguig City", "Pasig City",
-                  "Marikina City", "Paranaque City", "Pasay City",
+                  "Marikina City", "Parañaque City", "Pasay City",
                   "Manila City"]
+
+  const cities_info = {
+    "Quezon City" : { latitude: 14.6760, longitude: 121.0437}, 
+    "Makati City" : { latitude: 14.5547, longitude: 121.0244},
+    "Mandaluyong City" : { latitude: 14.5794, longitude: 121.0359},
+    "San Juan City" : { latitude: 14.6019, longitude: 121.0355},
+    "Taguig City" : { latitude: 14.5176, longitude: 121.0509},
+    "Pasig City" : { latitude: 14.5764, longitude: 121.0851},
+    "Marikina City" : { latitude: 14.6507, longitude: 121.1029},
+    "Parañaque City" : {latitude: 14.4793, longitude: 121.0198},
+    "Pasay City" : { latitude: 14.5378, longitude: 121.0014},
+    "Manila City" : { latitude: 14.5995, longitude: 120.9842}
+  }
   const property_type = ["Condominium", "Townhouse", "Dormitory"]
   const stay_period = ["Up to 6 months", "Maximum of 1 year"]
   
@@ -64,6 +90,7 @@ const PropertyForm = (props) => {
             onSubmit={(e) =>
               handleSubmit(e, data)
             }
+            autoComplete="off"
             className=" m-4 lg:p-10 p-6 bg-white rounded shadow-xl">
             <h2 className="text-2xl font-bold">Property Info</h2>
             <div className="mt-4">
@@ -92,7 +119,7 @@ const PropertyForm = (props) => {
             </div>
             
             <div className="flex mt-4">
-              <div className="mr-1">
+              <div className="mr-1 w-1/2">
                 <label className=" block text-sm text-gray-900" htmlFor="tenant_count">No. of tenant / property</label>
                 <input 
                   className="w-full px-2 py-1 font-light text-gray-700 bg-gray-100 rounded" 
@@ -104,7 +131,7 @@ const PropertyForm = (props) => {
                   placeholder="1" 
                   aria-label="tenant_count"/>
               </div>
-              <div className="ml-1">
+              <div className="ml-1 w-1/2">
                 <label className="block text-sm text-gray-900" htmlFor="property_count">No. of units or properties</label>
                 <input 
                   className="w-full px-2 py-1 font-light text-gray-700 bg-gray-100 rounded" 
@@ -155,6 +182,34 @@ const PropertyForm = (props) => {
                 placeholder="Barangay" 
                 aria-label="barangay"/>
             </div>
+
+            <p className=" block text-sm text-gray-900 mt-4" htmlFor="bldg_no">Coordinates in Decimal Degrees</p>
+            <div className=" flex">
+              <div className="mr-1 w-1/2">
+                <label className="hidden block text-sm text-gray-900" htmlFor="latitude">Latitude</label>
+                <input 
+                  className="w-full px-2 py-1 font-light text-gray-700 bg-gray-100 rounded" 
+                  id="latitude" 
+                  name="latitude" 
+                  type="number" 
+                  onChange = {(e) => handleOnChange(e) }
+                  placeholder="Latitude (N)" 
+                  aria-label="latitude"/>
+              </div>
+              <div className="ml-1 w-1/2">
+                <label className="hidden block text-sm text-gray-900" htmlFor="longitude">Longitude</label>
+                <input 
+                  className="w-full px-2 py-1 font-light text-gray-700 bg-gray-100 rounded" 
+                  id="longitude"  
+                  name="longitude" 
+                  type="number" 
+                  onChange = {(e) => handleOnChange(e) }
+                  placeholder="Longitude (E)" 
+                  aria-label="longitude"/>
+              </div>
+            </div>
+            <p className=" block text-sm text-gray-400" htmlFor="bldg_no">*Coordinates are optional. It will be defaulted to city municipality coordinates if left blank. Visit this
+            <span><a href="https://www.latlong.net/">site</a> to determine the property coordinates.</span></p>
 
             <div className="mt-4">
               <p className="text-sm block text-gray-900" >City</p>
