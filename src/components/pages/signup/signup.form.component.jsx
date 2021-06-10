@@ -87,15 +87,15 @@ const SignUpForm = (props) => {
       {
         mode === "edit" && 
           <div className="flex justify-end">
+            {
+              button_props_cancel && 
+              <div className="ml-4 w-max">
+                <Button {...button_props_cancel} />
+                </div>
+            }
             <div className="ml-4 w-max">
               <Button {...button_props} isLoading={isLoading} />
             </div>
-            {
-            button_props_cancel && 
-            <div className="ml-4 w-max">
-              <Button {...button_props_cancel} />
-              </div>
-            }
           </div>
       }
       {

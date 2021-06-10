@@ -56,7 +56,7 @@ const Footer = () => {
           <h5 className=" md:text-3xl sm:text-2xl text-xl font-normal mb-8 ">Newsletter</h5>
           <p className="mb-4">Subscribe your email to get the latest news and new offer also discount</p>
             <form>
-              <input className="w-full" type="text" placeholder="Email address"/>
+              <input className="w-full p-1" type="text" placeholder="Email address"/>
               <button><i className="fa fa-send"></i></button>
             </form>
           </div>

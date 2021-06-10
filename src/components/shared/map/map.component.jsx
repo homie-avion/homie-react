@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react'
+import React, {useState, Fragment} from 'react'
 
 import MapWithMarkers from './map.js'
 
@@ -18,7 +18,7 @@ const MapComponent = (props) => {
 
   const button_props = {
     "Location": {
-      variant: "success-button",
+      variant: "primary-button",
       text: "Location",
       type: "button",
       onClick: handleClick,
@@ -31,23 +31,25 @@ const MapComponent = (props) => {
     }
   }
   return (
-    <div>
+    <Fragment>
 
-      <div className = "flex justify-evenly">
-        {
-          choices.map((choice, key) => {
-            return <Button key={key} {...button_props[choice]}/>
-          })
-        }
+      <div className = "flex w-1/2 mb-2">
+        
+        <div className="mr-2">
+          <Button {...button_props["Location"]}/>
+        </div>
+        <div className="mr-2">
+          <Button {...button_props["Amenities"]}/>
+        </div>
+    
       </div>
 
       <MapWithMarkers 
         center={{ lat: parseFloat(latitude), lng: parseFloat(longitude) }}
         zoom={16}
-        apiKey={process.env.REACT_APP_GOOGLE_KEY}
         location={selectedChoice}
       />
-    </div>
+    </Fragment>
   
   )
 }

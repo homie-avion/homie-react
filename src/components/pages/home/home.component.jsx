@@ -37,7 +37,7 @@ const Home = () => {
   return (
     <Fragment>
       <section
-        className="h-screen bg-no-repeat bg-fixed bg-cover bg-top-center"
+        className="h-screen bg-no-repeat bg-fixed bg-cover bg-top-center p-2"
         style={{ backgroundImage: "url('assets/img/bg.jpg.webp')" }}
       >
         <div className="container mx-auto h-full flex justify-center items-center">

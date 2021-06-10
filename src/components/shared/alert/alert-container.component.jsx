@@ -19,11 +19,11 @@ const AlertContainer = () => {
   return (
     <Fragment>
       {alerts.length > 0 && (
-        <div className="fixed inset-0 z-60 mt-20 h-auto outline-none focus:outline-none">
-          {alerts.map((alert, id) => (
-            <Toast key={id} message={alert.message} title={alert.title} />
-          ))}
-        </div>
+        
+        alerts.map((alert, id) => (
+          <Toast key={id} message={alert.message} title={alert.title} />
+        ))
+
       )}
     </Fragment>
   );

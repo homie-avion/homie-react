@@ -14,7 +14,7 @@ const Property = (props) => {
             {user.role === "user" ? "Recommendations" : "My Properties"}
           </h1>
           {user.role !== "user" && (
-            <Link to="/create_property">
+            <Link to="/property/create">
               <button
                 type="button"
                 className="h-10 px-4 py-2 font-semibold rounded-full bg-blue-600 hover:bg-blue-400 text-white flex items-center"

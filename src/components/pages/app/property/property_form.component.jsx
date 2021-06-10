@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
+import {Link} from 'react-router-dom'
 import Button from "../../../shared/button/button.component"
 
 const PropertyForm = (props) => {
 
+  const { mode, property, handleSubmit, isLoading, button_props } = props;
+  
+
   const [data, setData] = useState({});
- 
+  
+  
   const handleOnChange = (event) => {
-    console.log(event.target.type)
+    
     if (["city_id","property_type_id","stay_period_id"].includes(event.target.name)){
       // console.log(event.target.name, event.target.getAttribute("data-anchor"))
       setData(data => ({...data, [event.target.name] : parseInt(event.target.getAttribute("data-anchor"))}))
@@ -18,30 +23,31 @@ const PropertyForm = (props) => {
                         }))
         if (Object.keys(data).includes("latitude") === false || !data["latitude"]){
           setData(data => ({...data, 
-            "latitude" : parseInt(cities_info[city_name]["latitude"])
+            "latitude" : parseFloat(cities_info[city_name]["latitude"])
           }))
         }
         if (Object.keys(data).includes("longitude") === false || !data["longitude"]){
           setData(data => ({...data,
-            "longitude" : parseInt(cities_info[city_name]["longitude"])
+            "longitude" : parseFloat(cities_info[city_name]["longitude"])
           }))
         }
-        console.log(data)      
       }
-
+      
     } else{
       if (event.target.type === "number") {
-
+        
         setData(data => ({...data, [event.target.name] : parseInt(event.target.value)}))
       } else {
         setData(data => ({...data,  [event.target.name] : event.target.value }))
       }
-
+      
       if (event.target.name === "rent_price"){
-        setData(data => ({...data, "rent_id": detect_price_id(parseInt(event.target.value))}))
+        setData(data => ({...data, "rent_id": detect_price_id(parseFloat(event.target.value))}))
       }
-
+      
     }
+    console.log(event.target.name, event.target.value)      
+    console.log(data)      
   }
 
   const detect_price_id = (price) => {
@@ -75,12 +81,6 @@ const PropertyForm = (props) => {
   }
   const property_type = ["Condominium", "Townhouse", "Dormitory"]
   const stay_period = ["Up to 6 months", "Maximum of 1 year"]
-  
-  const {
-    handleSubmit,
-    isLoading,
-    button_props
-  } = props;
 
   return (
     <div className="bg-gray-50 min-h-screen h-auto flex flex-col">
@@ -100,10 +100,12 @@ const PropertyForm = (props) => {
                 id="name" 
                 name="name" 
                 type="text" 
-                required 
+                required={ mode === "create"}
                 onChange = {(e) => handleOnChange(e) }
-                placeholder="i.e. John Doe's Dormitory" 
-                aria-label="name"/>
+                placeholder={property ? property.name :"i.e. John Doe's Dormitory"}
+                aria-label="name"
+                // value={data.name ? data.name : undefined}
+                />
             </div>
             <div className="mt-4">
               <label className="block text-sm text-gray-900" htmlFor="rent_price">Rent per month in PHP</label>
@@ -112,10 +114,13 @@ const PropertyForm = (props) => {
                 id="rent_price" 
                 name="rent_price" 
                 type="number" 
-                required 
+                step="0.01"
+                required={ mode === "create"}
                 onChange = {(e) => handleOnChange(e) }
-                placeholder="0.00" 
-                aria-label="rent_price"/>
+                placeholder={property ? property.rent_price : "0.00"} 
+                aria-label="rent_price"
+                // value={data.rent_price ? data.rent_price : undefined}
+                />
             </div>
             
             <div className="flex mt-4">
@@ -126,10 +131,12 @@ const PropertyForm = (props) => {
                   id="tenant_count" 
                   name="tenant_count" 
                   type="number" 
-                  required 
+                  required = { mode === "create"}
                   onChange = {(e) => handleOnChange(e) }
-                  placeholder="1" 
-                  aria-label="tenant_count"/>
+                  placeholder={property ? property.tenant_count : "1"} 
+                  aria-label="tenant_count"
+                  // value={data.tenant_count ? data.tenant_count : undefined}
+                  />
               </div>
               <div className="ml-1 w-1/2">
                 <label className="block text-sm text-gray-900" htmlFor="property_count">No. of units or properties</label>
@@ -138,10 +145,12 @@ const PropertyForm = (props) => {
                   id="property_count"  
                   name="property_count" 
                   type="number" 
-                  required
+                  required = { mode === "create"}
                   onChange = {(e) => handleOnChange(e) }
-                  placeholder="1" 
-                  aria-label="property_count"/>
+                  placeholder={property ? property.property_count : "1"} 
+                  aria-label="property_count"
+                  // value={data.property_count ? data.property_count : undefined}
+                  />
               </div>
             </div>
 
@@ -153,10 +162,12 @@ const PropertyForm = (props) => {
                 id="bldg_no" 
                 name="bldg_no" 
                 type="text" 
-                required 
+                required = { mode === "create"}
                 onChange = {(e) => handleOnChange(e) }
-                placeholder="Bldg No." 
-                aria-label="bldg_no"/>
+                placeholder={property ? property.bldg_no : "Bldg No."} 
+                aria-label="bldg_no"
+                // value={data.bldg_no ? data.bldg_no : undefined}
+                />
             </div>
             <div className="mt-2">
               <label className="hidden text-sm block text-gray-900" htmlFor="street">Street</label>
@@ -165,10 +176,12 @@ const PropertyForm = (props) => {
                 id="street" 
                 name="street" 
                 type="text" 
-                required 
+                required = { mode === "create"}
                 onChange = {(e) => handleOnChange(e) }
-                placeholder="Street" 
-                aria-label="street"/>
+                placeholder={property ? property.street : "Street"} 
+                aria-label="street"
+                // value={data.street ? data.street : undefined}
+                />
             </div>
             <div className="mt-2">
               <label className="hidden text-sm block text-gray-900" htmlFor="barangay">barangay</label>
@@ -177,10 +190,12 @@ const PropertyForm = (props) => {
                 id="barangay" 
                 name="barangay" 
                 type="text" 
-                required 
+                required = { mode === "create"}
                 onChange = {(e) => handleOnChange(e) }
-                placeholder="Barangay" 
-                aria-label="barangay"/>
+                placeholder={property ? property.barangay : "Barangay"}  
+                aria-label="barangay"
+                // value={data.barangay ? data.barangay : undefined}
+                />
             </div>
 
             <p className=" block text-sm text-gray-900 mt-4" htmlFor="bldg_no">Coordinates in Decimal Degrees</p>
@@ -193,8 +208,10 @@ const PropertyForm = (props) => {
                   name="latitude" 
                   type="number" 
                   onChange = {(e) => handleOnChange(e) }
-                  placeholder="Latitude (N)" 
-                  aria-label="latitude"/>
+                  placeholder={property ? property.latitude :  "Latitude (N)"}
+                  aria-label="latitude"
+                  // value={data.latitude ? data.latitude : undefined}
+                  />
               </div>
               <div className="ml-1 w-1/2">
                 <label className="hidden block text-sm text-gray-900" htmlFor="longitude">Longitude</label>
@@ -204,12 +221,14 @@ const PropertyForm = (props) => {
                   name="longitude" 
                   type="number" 
                   onChange = {(e) => handleOnChange(e) }
-                  placeholder="Longitude (E)" 
-                  aria-label="longitude"/>
+                  placeholder={property ? property.longitude :"Longitude (E)"}
+                  aria-label="longitude"
+                  // value={data.longitude ? data.longitude : undefined}
+                  />
               </div>
             </div>
-            <p className=" block text-sm text-gray-400" htmlFor="bldg_no">*Coordinates are optional. It will be defaulted to city municipality coordinates if left blank. Visit this
-            <span><a href="https://www.latlong.net/">site</a> to determine the property coordinates.</span></p>
+            <p className=" block text-sm text-gray-400" htmlFor="bldg_no">*Coordinates are optional. It will be defaulted to city municipality coordinates if left blank. Visit this 
+            <span ><a className="text-blue-600" target="_blank" href="https://www.latlong.net/"> site</a></span> to determine the property coordinates.</p>
 
             <div className="mt-4">
               <p className="text-sm block text-gray-900" >City</p>
@@ -227,8 +246,8 @@ const PropertyForm = (props) => {
                           data-anchor={index1}
                           data-name={city}
                           name="city_id" 
-                          required={index1 === 1 && true}
-                          // checked={ }
+                          required= {mode === "create" && index1 === 1}
+                          checked={ property  && (index1 === property.city_id ? true : false) }
                           onChange={(e) => handleOnChange(e)}
                       />
                       <label className="text-gray-500 text-sm mb-8" htmlFor={"city_id"+index1}>  {city}</label>
@@ -241,9 +260,9 @@ const PropertyForm = (props) => {
             </div>
 
             <div className="mt-4">
-              <p className="text-sm block text-gray-900">Propety Type</p>
+              <p className="text-sm block text-gray-900">Property Type</p>
               {
-                property_type.map((property, index) => {
+                property_type.map((property_local, index) => {
                   let index1 = index + 1
                 
                   return (
@@ -256,11 +275,11 @@ const PropertyForm = (props) => {
                           id={"property_type_id"+index1}
                           data-anchor={index1}
                           name="property_type_id" 
-                          required={index1 === 1 && true}
-                          // checked={ }
+                          required={mode === "create" && index1 === 1}
+                          checked={ property  && (index1 === property.property_type_id ? true : false) }
                           onChange={(e) => handleOnChange(e)}
                       />
-                      <label className="text-gray-500 text-sm mb-8" htmlFor={"property_type_id"+index1}>  {property}</label>
+                      <label className="text-gray-500 text-sm mb-8" htmlFor={"property_type_id"+index1}>  {property_local}</label>
                     </div>
                 
                   )
@@ -284,8 +303,8 @@ const PropertyForm = (props) => {
                           id={"stay_period_id"+index1}
                           data-anchor={index1}
                           name="stay_period_id" 
-                          required={index1 === 1 && true}
-                          // checked={ }
+                          required={mode === "create" && index1 === 1}
+                          checked={ property  && (index1 === property.stay_period_id ? true : false) }
                           onChange={(e) => handleOnChange(e)}
                       />
                       <label className="text-gray-500 text-sm mb-8" htmlFor={"stay_period_id"+index1}>  {stay}</label>
@@ -302,8 +321,19 @@ const PropertyForm = (props) => {
             <div className="lg:mt-10 mt-6">
               {
                 // <button className="px-4 py-1 text-white tracking-wider bg-gray-900 rounded" type="submit">Submit</button>
-
-                <Button {...button_props} isLoading={isLoading} />
+                mode === "create" ?
+                  <Button {...button_props} isLoading={isLoading} />
+                : 
+                  <Fragment>
+                    <Link 
+                      to={`/properties/${data.id}`}
+                      >
+                      <button className="flex justify-center items-center w-full text-center px-4 py-3 rounded bg-gray-400 text-white hover:bg-gray-500 focus:outline-none my-1">
+                        Cancel
+                      </button>
+                    </Link>
+                    <Button {...button_props} isLoading={isLoading} />
+                  </Fragment>
               }
             </div>
           </form>

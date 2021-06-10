@@ -1,4 +1,5 @@
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import { LoadScript } from '@react-google-maps/api';
 
 import Navbar from './components/layout/navbar/navbar.component'
 import Home from './components/pages/home/home.component'
@@ -19,6 +20,7 @@ import SearchPreferencesContainer from './containers/user/user.searchPreferences
 import PropertyContainer from './containers/property/property.container'
 import SinglePropertyContainer from './containers/property/single_property.container'
 import CreatePropertyContainer from './containers/property/create_property.container'
+import EditPropertyContainer from './containers/property/edit_property.container'
 
 // state
 import UserState from './context/user/UserState'
@@ -30,47 +32,55 @@ import PropertyState from './context/property/PropertyState'
 
 import './App.css'
 
+const lib = ["places"];
+
 function App() {
 
   return (
-    <UserState>
-      <PropertyState>
-        <AlertState>
-          <ModalState>
-            <Router>
-              <div className="App">
-                <Navbar />
-                <AlertContainer/>
-                <Modal/>
-                <Switch>
+    <LoadScript 
+      googleMapsApiKey={process.env.REACT_APP_GOOGLE_KEY}
+      libraries={lib}
+      >
+      <UserState>
+        <PropertyState>
+          <AlertState>
+            <ModalState>
+              <Router>
+                <div className="App relative">
+                  <Navbar />
+                  <AlertContainer/>
+                  <Modal/>
+                  <Switch>
 
-                  <Route exact path="/" component={Home}/>
-                  <Route exact path="/signup" component={SignUpContainer}/>
-                  <Route exact path="/signin" component={SignInContainer}/>
-                  
-                  <Route exact path="/partners" component={Partners}/>
-                  <Route exact path="/partners/signup" component={SignUpContainer}/>
+                    <Route exact path="/" component={Home}/>
+                    <Route exact path="/signup" component={SignUpContainer}/>
+                    <Route exact path="/signin" component={SignInContainer}/>
+                    
+                    <Route exact path="/partners" component={Partners}/>
+                    <Route exact path="/partners/signup" component={SignUpContainer}/>
 
-                  <Route exact path="/search_preferences" component={SearchPreferencesContainer}/>
+                    <Route exact path="/search_preferences" component={SearchPreferencesContainer}/>
 
-                  <Route exact path="/recommendations" component={PropertyContainer}/>
-                  <Route exact path="/recommendations/:id" component={SinglePropertyContainer}/>
+                    <Route exact path="/recommendations" component={PropertyContainer}/>
+                    <Route exact path="/recommendations/:id" component={SinglePropertyContainer}/>
 
-                  <Route exact path="/properties" component={PropertyContainer}/>
-                  <Route exact path="/properties/:id" component={SinglePropertyContainer}/>
-                  <Route exact path="/create_property" component={CreatePropertyContainer}/>
+                    <Route exact path="/properties" component={PropertyContainer}/>
+                    <Route exact path="/properties/:id" component={SinglePropertyContainer}/>
+                    <Route exact path="/property/create" component={CreatePropertyContainer}/>
+                    <Route exact path="/property/edit/:id" component={EditPropertyContainer}/>
 
-                  <Route exact path="/account" component={UserContainer}/>
+                    <Route exact path="/account" component={UserContainer}/>
 
-                  <Route component={NotFound}/>
-                </Switch>
-                <Footer/>
-              </div>
-            </Router>
-          </ModalState>
-        </AlertState>
-      </PropertyState>
-    </UserState>
+                    <Route component={NotFound}/>
+                  </Switch>
+                  <Footer/>
+                </div>
+              </Router>
+            </ModalState>
+          </AlertState>
+        </PropertyState>
+      </UserState>
+    </LoadScript>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, { useContext} from 'react'
 import {useHistory} from "react-router-dom";
 
 import PropertyForm from '../../components/pages/app/property/property_form.component'
@@ -9,7 +9,7 @@ import AlertContext from "../../context/alert/alertContext";
 
 
 const CreatePropertyContainer = () => {
-  
+
   const history = useHistory()
   const userContext = useContext(UserContext)
   const propertyContext = useContext(PropertyContext)
@@ -56,6 +56,7 @@ const CreatePropertyContainer = () => {
   };
 
   const propsSent = {
+    mode: "create",
     handleSubmit,
     isLoading,
     button_props

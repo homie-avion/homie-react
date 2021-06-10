@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
+import {Link} from 'react-router-dom'
+
 import Button from '../../../shared/button/button.component'
 
 import MapComponent from '../../../shared/map/map.component'
@@ -7,6 +9,7 @@ const SingleProperty = ({property , role , button_props_delete, isLoading}) => {
   const {
     id,
     name,
+    username,
     rent_price,
     tenant_count,
     property_count,
@@ -32,6 +35,10 @@ const SingleProperty = ({property , role , button_props_delete, isLoading}) => {
     updated_at,
   } = property;
   // const 
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
   
   const [picNo, setPicNo] = useState(1)
   // console.log(picture_urls)
@@ -95,7 +102,7 @@ const SingleProperty = ({property , role , button_props_delete, isLoading}) => {
           </div>
           <div className="md:flex-1 px-4 ">
             <h2 className="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">{name}</h2>
-            <p className="text-gray-500 text-sm">By <a href="#" className="text-indigo-600 hover:underline">{name.split("'")[0]}</a></p>
+            <p className="text-gray-500 text-sm">By <a href="#" className="text-indigo-600 hover:underline">{username}</a></p>
 
             <div className="flex items-center space-x-4 my-4">
               <div>
@@ -144,15 +151,25 @@ const SingleProperty = ({property , role , button_props_delete, isLoading}) => {
               {
                 role === "user" ?
                   <button type="button" className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
-                    Chat with our Partner
+                    Contact #: 0912-XXX-XXXX
                   </button>
                 :
                   // Edit and Delete property button
                   
-                  
-                  <div className="w-1/3">
-                    <Button {...button_props_delete} isLoading={isLoading} />
-                  </div>
+                  <Fragment>
+                    
+                    <div className="w-20">
+                      <Button {...button_props_delete} isLoading={isLoading} />
+                    </div>
+                    <Link 
+                      className="w-20"
+                      to={`/property/edit/${id}`}
+                      >
+                      <button className="flex justify-center items-center w-full text-center px-4 py-3 rounded bg-blue-400 text-white hover:bg-blue-500 focus:outline-none my-1">
+                        Edit
+                      </button>
+                    </Link>
+                  </Fragment>
                   
               }
             </div>

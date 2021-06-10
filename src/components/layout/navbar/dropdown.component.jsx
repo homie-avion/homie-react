@@ -6,7 +6,7 @@ const Dropdown = ({ role , isOpen, toggle, token, handleClick }) => {
   
   return (
     <div
-      className={ isOpen ? "grid grid-rows-2 items-center bg-white px-6" : "hidden" }
+      className={ isOpen ? "fixed w-screen inset-x-0 top-22 grid grid-rows-2 items-center bg-white px-6" : "hidden" }
       onClick={toggle}
     >
     {

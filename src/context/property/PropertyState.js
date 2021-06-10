@@ -91,15 +91,19 @@ const PropertyState = (props) => {
       console.log(error);
     }
 
-    const result = await res.json();
-    console.log(result)
-    dispatch({
-      type: SET_PROPERTY,
-      payload: {
-        id: id,
-        data: result.data
-      }
-    })
+    if (res.status === 200){
+      const result = await res.json();
+      result.data["latitude"] = parseFloat(result.data["latitude"])
+      result.data["longitude"] = parseFloat(result.data["longitude"])
+      console.log(result)
+      dispatch({
+        type: SET_PROPERTY,
+        payload: {
+          id: id,
+          data: result.data
+        }
+      })
+    }
   }
 
   const createProperty = async(user, data, token, cb) => {
@@ -133,6 +137,36 @@ const PropertyState = (props) => {
     
     cb({status, message}, res.status )
 
+  }
+
+  const editProperty = async(id, data, token, cb) => {
+    // setIsLoading()
+    const res = await fetch(`${url}/properties/${id}`, 
+                  {
+                    method: 'PATCH',
+                    headers: {
+                      'Content-type': 'application/json',
+                      'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(data),
+                  })
+
+    // const data = await res.json()
+
+    if (res.status === 200){
+        console.log('Property updated.')
+        getProperty(id, token)
+    }
+    
+    const result = await res.json()
+    // For error message
+    const {status, message} = result
+    dispatch({
+        type: SET_MESSAGE,
+        payload: {status, message}
+    })
+
+    cb({status, message} , res.status)
   }
 
   const deleteProperty = async(user, id, token, cb) => {
@@ -190,6 +224,7 @@ const PropertyState = (props) => {
         getProperties,
         getProperty,
         createProperty,
+        editProperty,
         deleteProperty,
         unsetProperties
       }}

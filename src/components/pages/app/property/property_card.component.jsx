@@ -5,6 +5,7 @@ const PropertyCard = ({ property, user }) => {
   const {
     id,
     name,
+    username,
     rent_price,
     tenant_count,
     property_count,
@@ -53,7 +54,7 @@ const PropertyCard = ({ property, user }) => {
               </div>
               <h2 className="flex-auto text-lg font-medium">{name}</h2>
             </div>
-            <p className="mt-3"></p>
+            <p className="mt-3 text-gray-500">Posted by {username}</p>
             <div className="flex py-4  text-sm text-gray-600">
               <div className="flex-1 inline-flex items-center">
                 <svg

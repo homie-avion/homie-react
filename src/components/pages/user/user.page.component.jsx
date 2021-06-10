@@ -16,11 +16,11 @@ const UserPage = (props) => {
 
           {open && (
             <div className = "flex justify-end">
-              <div className="ml-4 w-max">
-                <Button {...button_props_edit} />
-              </div>
               <div className="ml-4 w-max" >
                 <Button {...button_props_delete} />
+              </div>
+              <div className="ml-4 w-max">
+                <Button {...button_props_edit} />
               </div>
             </div>
           )}

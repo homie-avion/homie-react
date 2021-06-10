@@ -8,27 +8,20 @@ const Toast = ({ message, title }) => {
 
   const [showAlert, setShowAlert] = useState(true);
 
-  // const toggleShow = () => {
-  //   setShowToast(!showToast);
-
-  //   const toasty = document.querySelectorAll(".toasty");
-
-  //   if (toasty.length === 1) {
-  //     alertContext.clearAlert();
-  //   }
-  // };
-
   return (
     <Fragment>
       {
         showAlert && (
-          <div className="absolute w-screen text-white px-6 py-4 border-0 rounded mb-4 bg-blue-500">
+          <div className="fixed lg:w-80 lg:right-10 sm:right-0 sm:w-screen right-0 w-screen text-white px-6 py-4 border-0 rounded my-2 bg-blue-500">
             <span className="text-xl inline-block mr-5 align-middle">
                 <i className="fas fa-bell" />
             </span>
-            <span className="inline-block align-middle mr-8">
-              <b className="capitalize">{title}!</b> {message}
-            </span>
+            <p className="inline-block align-middle mr-8">
+              <b className="capitalize">{title}!</b> 
+            </p>
+            <p>
+              {message}
+            </p>
             <button
               className="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none"
               onClick={() => setShowAlert(!showAlert)}
@@ -44,11 +37,4 @@ const Toast = ({ message, title }) => {
 };
 
 export default Toast;
-// return (
-//     <ToastB className="toasty" style={{zIndex:10, minWidth: '200px'}} show={showToast} delay={3000} onClose={toggleShow} autohide>
-//         <ToastB.Header>
-//             <strong className="mr-auto">{title}</strong>
-//         </ToastB.Header>
-//         <ToastB.Body>{message}</ToastB.Body>
-//     </ToastB>
-// )
+

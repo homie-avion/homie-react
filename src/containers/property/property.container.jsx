@@ -24,10 +24,15 @@ const PropertyContainer = () => {
     
   }, [preferences])
 
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [properties])
+
   return (
 
     <Property
       properties = {properties}
+      isLoading = {isLoading}
       user = {user}
     />
 
